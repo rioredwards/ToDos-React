@@ -1,12 +1,15 @@
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import Header from './components/Header/Header.js';
-import Main from './components/Main/Main.js';
+import Items from './components/Items/Items.js';
 
 function App() {
   return (
     <div className="App">
       <Header />
-      <Main />
+      <Switch>
+        <Route path="/items" component={Items}></Route>
+      </Switch>
     </div>
   );
 }
