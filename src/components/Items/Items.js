@@ -1,5 +1,6 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+import { useItems } from '../../context/ItemsContext.js';
 import { useUser } from '../../context/UserContext.js';
 
 const tempItems = [
@@ -12,9 +13,12 @@ const tempItems = [
 
 export default function Items() {
   const { user } = useUser();
+  const { items } = useItems();
+  console.log('items', items);
   if (!user) {
     return <Redirect to="/auth/sign-in" />;
   }
+
   return tempItems.map((item) => {
     return <div key={item.id}>{item.description}</div>;
   });

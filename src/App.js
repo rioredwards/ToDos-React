@@ -7,7 +7,6 @@ import { useUser } from './context/UserContext';
 
 function App() {
   const { user } = useUser();
-  console.log('user', user);
   return (
     <div className="App">
       <Header />
