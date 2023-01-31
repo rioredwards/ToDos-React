@@ -4,6 +4,7 @@ import Header from './components/Header/Header';
 import Items from './components/Items/Items';
 import Auth from './components/Auth/Auth';
 import { useUser } from './context/UserContext';
+import { ItemsProvider } from './context/ItemsContext.js';
 
 function App() {
   const { user } = useUser();
@@ -12,7 +13,9 @@ function App() {
       <Header />
       <Switch>
         <Route path="/auth/:type" component={Auth} />
-        <Route path="/items" component={Items} />
+        <ItemsProvider>
+          <Route path="/items" component={Items} />
+        </ItemsProvider>
         <Route exact path="/">
           <>
             {user && <Redirect to="/items" />}

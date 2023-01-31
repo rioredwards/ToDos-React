@@ -5,8 +5,10 @@ export async function getListItems() {
 
   return checkError(resp);
 }
-export async function createListItems() {
-  // TODO
+export async function createListItems({ description }) {
+  const resp = await client.from('todos').insert([{ description }]).single();
+
+  return checkError(resp);
 }
 export async function toggleListItem() {
   // TODO
