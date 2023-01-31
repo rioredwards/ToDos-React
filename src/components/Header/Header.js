@@ -1,3 +1,4 @@
+import logo from './todo-logo.png';
 import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { useUser } from '../../context/UserContext.js';
@@ -21,11 +22,11 @@ export default function Header() {
       <Container>
         <Navbar.Brand href="/">
           <img
-            src="assets/todo-logo.png"
+            src={logo}
             width="30"
             height="30"
             className="d-inline-block align-top"
-            alt="ToDo's Logo"
+            alt="ToDo Logo"
           />
           {'  '}
           Todos
