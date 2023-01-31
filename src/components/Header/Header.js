@@ -17,7 +17,7 @@ export default function Header() {
           Todos
         </Navbar.Brand>
         <Nav className="mr-auto">
-          <Nav.Link href="#home">Sign Out</Nav.Link>
+          <Nav.Link>Sign Out</Nav.Link>
         </Nav>
       </Container>
     </Navbar>

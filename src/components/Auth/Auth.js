@@ -1,15 +1,26 @@
 import { useState } from 'react';
 import { Nav } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect, useParams } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 import { authUser } from '../../services/auth';
 
 export default function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { type } = useParams();
+  const { user, setUser } = useUser();
+
+  if (user) {
+    return <Redirect to="/items" />;
+  }
 
   const submitAuth = async () => {
-    // TODO
+    try {
+      const newUser = await authUser(email, password, type);
+      setUser(newUser);
+    } catch (e) {
+      console.error(e);
+    }
   };
 
   return (
@@ -20,6 +31,7 @@ export default function Auth() {
         <NavLink to="/auth/sign-up">Sign Up</NavLink>
       </Nav>
       <div>
+        <h3>{type}</h3>
         <div>
           <label htmlFor="emailInput">Email</label>
           <input
