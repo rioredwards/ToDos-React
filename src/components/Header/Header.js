@@ -1,7 +1,21 @@
 import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
+import { useUser } from '../../context/UserContext.js';
+import { signOut } from '../../services/auth.js';
 
 export default function Header() {
+  const { user, setUser } = useUser();
+
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      setUser(null);
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.error(e.message);
+    }
+  };
+
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
@@ -16,9 +30,12 @@ export default function Header() {
           {'  '}
           Todos
         </Navbar.Brand>
-        <Nav className="mr-auto">
-          <Nav.Link>Sign Out</Nav.Link>
-        </Nav>
+        {user && (
+          <Nav className="mr-auto">
+            <Navbar.Text>hello {user.email}</Navbar.Text>
+            <Nav.Link onClick={handleSignOut}>Sign Out</Nav.Link>
+          </Nav>
+        )}
       </Container>
     </Navbar>
   );

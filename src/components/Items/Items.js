@@ -1,4 +1,6 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { useUser } from '../../context/UserContext.js';
 
 const tempItems = [
   { id: 0, description: 'Write some code' },
@@ -9,6 +11,10 @@ const tempItems = [
 ];
 
 export default function Items() {
+  const { user } = useUser();
+  if (!user) {
+    return <Redirect to="/auth/sign-in" />;
+  }
   return tempItems.map((item) => {
     return <div key={item.id}>{item.description}</div>;
   });
