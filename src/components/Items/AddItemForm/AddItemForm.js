@@ -15,7 +15,6 @@ export default function AddItemForm() {
     } catch (e) {
       console.error(e);
     }
-    console.log(description);
   };
 
   return (
