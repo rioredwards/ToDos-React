@@ -9,9 +9,11 @@ export default function ItemsList() {
   return (
     <Container className="d-flex flex-column align-items-center">
       <ListGroup>
-        {items.map((item) => {
-          return <Item key={item.id} description={item.description}></Item>;
-        })}
+        {!items && <p>👋 Looks like your todo list is empty! Use the form above to add a ToDo!</p>}
+        {items &&
+          items.map((item) => {
+            return <Item key={item.id} description={item.description}></Item>;
+          })}
       </ListGroup>
     </Container>
   );
