@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Nav } from 'react-bootstrap';
+import { Button, Container, Form, Nav } from 'react-bootstrap';
 import { NavLink, Redirect, useParams } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 import { authUser } from '../../services/auth';
@@ -24,36 +24,51 @@ export default function Auth() {
   };
 
   return (
-    <div>
-      <h2>Welcome to ToDos</h2>
-      <Nav>
-        <NavLink to="/auth/sign-in">Sign In</NavLink>
-        <NavLink to="/auth/sign-up">Sign Up</NavLink>
-      </Nav>
-      <div>
-        <h3>{type}</h3>
-        <div>
-          <label htmlFor="emailInput">Email</label>
-          <input
+    <Container className="d-flex flex-column align-items-center p-3">
+      <Form
+        onSubmit={(e) => {
+          submitAuth();
+          e.preventDefault();
+        }}
+      >
+        <h2>Welcome to ToDos</h2>
+        <hr />
+        <Nav className="mt-4" justify variant="tabs" activeKey={type}>
+          <Nav.Item>
+            <Nav.Link eventKey="sign-in" href="/auth/sign-in">
+              Sign In
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey="sign-up" href="/auth/sign-up">
+              Sign Up
+            </Nav.Link>
+          </Nav.Item>
+        </Nav>
+        <Form.Group className="mb-3 mt-4">
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
             type="email"
+            placeholder="Enter email"
             id="emailInput"
-            placeholder="name@example.com"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
-        </div>
-        <div>
-          <label htmlFor="passwordInput">Password</label>
-          <input
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
             type="password"
+            placeholder="Password"
             id="passwordInput"
-            placeholder="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </div>
-      </div>
-      <button onClick={submitAuth}>Submit</button>
-    </div>
+        </Form.Group>
+        <Button variant="primary" type="submit">
+          {type}
+        </Button>
+      </Form>
+    </Container>
   );
 }

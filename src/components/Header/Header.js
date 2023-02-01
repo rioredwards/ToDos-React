@@ -29,7 +29,7 @@ export default function Header() {
             alt="ToDo Logo"
           />
           {'  '}
-          Todos
+          ToDos
         </Navbar.Brand>
         {user && (
           <Nav className="mr-auto">
