@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button, Container, Form, Nav } from 'react-bootstrap';
-import { NavLink, Redirect, useParams } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 import { authUser } from '../../services/auth';
 
