@@ -1,27 +1,37 @@
 import React from 'react';
-import { Container, ListGroup } from 'react-bootstrap';
+import { Col, Container, ListGroup, Row } from 'react-bootstrap';
 import { useItems } from '../../../context/ItemsContext.js';
 import Item from './Item/Item';
 
 export default function ItemsList() {
   const { items } = useItems();
+  console.log('items', items);
 
   return (
-    <Container className="d-flex flex-column align-items-center">
-      <ListGroup>
-        {!items && <p>👋 Looks like your todo list is empty! Use the form above to add a ToDo!</p>}
-        {items &&
-          items.map((item) => {
-            return (
-              <Item
-                key={item.id}
-                id={item.id}
-                description={item.description}
-                complete={item.complete}
-              ></Item>
-            );
-          })}
-      </ListGroup>
+    <Container>
+      <Row className="d-flex justify-content-center">
+        <Col xs={12} xl={10} className="d-flex flex-column">
+          <ListGroup>
+            {!items.length && (
+              <>
+                <p>Looks like your todo list is empty!</p>
+                <p>Use the form above to add a ToDo!</p>
+              </>
+            )}
+            {!!items.length &&
+              items.map((item) => {
+                return (
+                  <Item
+                    key={item.id}
+                    id={item.id}
+                    description={item.description}
+                    complete={item.complete}
+                  ></Item>
+                );
+              })}
+          </ListGroup>
+        </Col>
+      </Row>
     </Container>
   );
 }

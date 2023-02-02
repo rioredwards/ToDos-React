@@ -12,10 +12,10 @@ import { useItems } from '../../../../context/ItemsContext.js';
 import { Image } from 'react-bootstrap';
 
 export default function Item({ id, description, complete }) {
-  const { handleCompleteToDo } = useItems();
+  const { handleCompleteToDo, handleDeleteToDo } = useItems();
 
   return (
-    <ListGroup.Item action variant="success">
+    <ListGroup.Item className="w-100" action variant="success">
       <Container>
         <Row className="align-items-center justify-content-between">
           <Col xs={6}>
@@ -25,11 +25,16 @@ export default function Item({ id, description, complete }) {
             <Container className="d-flex align-items-center justify-content-end gap-4">
               <FormCheck
                 className="form-control-lg my-0 px-0"
-                onClick={() => handleCompleteToDo(id, complete)}
+                onChange={() => handleCompleteToDo(id, complete)}
                 checked={complete}
               />
               <Image height={24} src="pencil.png" alt="edit" />
-              <Image height={24} src="trash-can.png" alt="delete" />
+              <Image
+                height={24}
+                src="trash-can.png"
+                onClick={() => handleDeleteToDo(id)}
+                alt="delete"
+              />
             </Container>
           </Col>
         </Row>
