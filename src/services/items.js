@@ -19,6 +19,16 @@ export async function toggleListItem(id, complete) {
   return checkError(resp);
 }
 
+export async function editListItem(id, newDescription) {
+  const resp = await client
+    .from('todos')
+    .update({ description: newDescription })
+    .eq('id', id)
+    .single();
+
+  return checkError(resp);
+}
+
 export async function deleteListItem(id) {
   const resp = await client.from('todos').delete().eq('id', id);
 

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useState, createContext, useContext } from 'react';
-import { deleteListItem, getListItems, toggleListItem } from '../services/items';
+import { deleteListItem, editListItem, getListItems, toggleListItem } from '../services/items';
 
 const ItemsContext = createContext();
 
@@ -34,6 +34,21 @@ const ItemsProvider = ({ children }) => {
     completeToDo(id, complete);
   };
 
+  const handleEditToDo = (id, description) => {
+    const editToDo = async (id, description) => {
+      try {
+        const data = await editListItem(id, description);
+        const newItems = [...items];
+        const idx = newItems.findIndex((item) => item.id === id);
+        newItems[idx] = data;
+        setItems(newItems);
+      } catch (e) {
+        console.error(e.message);
+      }
+    };
+    editToDo(id, description);
+  };
+
   const handleDeleteToDo = (id) => {
     const deleteToDo = async (id) => {
       try {
@@ -50,7 +65,9 @@ const ItemsProvider = ({ children }) => {
   };
 
   return (
-    <ItemsContext.Provider value={{ items, setItems, handleCompleteToDo, handleDeleteToDo }}>
+    <ItemsContext.Provider
+      value={{ items, setItems, handleCompleteToDo, handleDeleteToDo, handleEditToDo }}
+    >
       {children}
     </ItemsContext.Provider>
   );

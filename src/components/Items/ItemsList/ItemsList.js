@@ -1,11 +1,10 @@
 import React from 'react';
-import { Col, Container, ListGroup, Row } from 'react-bootstrap';
+import { Alert, Col, Container, ListGroup, Row } from 'react-bootstrap';
 import { useItems } from '../../../context/ItemsContext.js';
 import Item from './Item/Item';
 
 export default function ItemsList() {
   const { items } = useItems();
-  console.log('items', items);
 
   return (
     <Container>
@@ -13,10 +12,10 @@ export default function ItemsList() {
         <Col xs={12} xl={10} className="d-flex flex-column">
           <ListGroup>
             {!items.length && (
-              <>
-                <p>Looks like your todo list is empty!</p>
-                <p>Use the form above to add a ToDo!</p>
-              </>
+              <Alert variant="warning">
+                👋 Looks like your list is empty!
+                <br /> Use the form above to add a new ToDo!
+              </Alert>
             )}
             {!!items.length &&
               items.map((item) => {

@@ -13,7 +13,7 @@ function App() {
       <Header />
       <Container className="mt-5">
         <Row className="d-flex justify-content-center">
-          <Col sm={10} md={8} lg={6} className="bg-light text-dark border rounded p-3">
+          <Col sm={10} md={8} lg={6} className="bg-light text-dark border rounded px-3 py-4">
             <Switch>
               <Route exact path="/">
                 <>
