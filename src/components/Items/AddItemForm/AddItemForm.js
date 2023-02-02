@@ -29,7 +29,7 @@ export default function AddItemForm() {
         <Form.Group className="mb-3">
           <h2 className="text-center">Add Todo</h2>
           <InputGroup className="mb-3">
-            <Button variant="outline-primary" type="submit" className="d-inline">
+            <Button variant="primary" type="submit" className="d-inline">
               Add
             </Button>
             <Form.Control

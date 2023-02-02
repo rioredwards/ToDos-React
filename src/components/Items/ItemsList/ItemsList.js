@@ -12,7 +12,14 @@ export default function ItemsList() {
         {!items && <p>👋 Looks like your todo list is empty! Use the form above to add a ToDo!</p>}
         {items &&
           items.map((item) => {
-            return <Item key={item.id} description={item.description}></Item>;
+            return (
+              <Item
+                key={item.id}
+                id={item.id}
+                description={item.description}
+                complete={item.complete}
+              ></Item>
+            );
           })}
       </ListGroup>
     </Container>

@@ -10,6 +10,9 @@ export async function createListItem(description) {
 
   return checkError(resp);
 }
-export async function toggleListItem() {
-  // TODO
+export async function toggleListItem(id, complete) {
+  const newValue = complete ? false : true;
+  const resp = await client.from('todos').update({ complete: newValue }).eq('id', id).single();
+
+  return checkError(resp);
 }
