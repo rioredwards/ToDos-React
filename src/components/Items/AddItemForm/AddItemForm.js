@@ -2,7 +2,6 @@ import React from 'react';
 import { useState } from 'react';
 import { Button, Container, Form, InputGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { createListItem } from '../../../services/items.js';
 import { todoActions } from '../../../store/todo-slice.js';
 
 export default function AddItemForm() {

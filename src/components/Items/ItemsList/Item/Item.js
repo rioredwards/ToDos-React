@@ -2,17 +2,29 @@ import React, { useState } from 'react';
 import { Button, Col, Container, Form, FormCheck, ListGroup, Row } from 'react-bootstrap';
 import { useItems } from '../../../../context/ItemsContext.js';
 import { Image } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { todoActions } from '../../../../store/todo-slice.js';
 
 export default function Item({ id, description, complete }) {
+  const dispatch = useDispatch();
   const [editing, setEditing] = useState(false);
   const [newDescription, setNewDescription] = useState(description);
-  const { handleCompleteToDo, handleDeleteToDo, handleEditToDo } = useItems();
+  const { handleDeleteToDo, handleEditToDo } = useItems();
 
   function handleSubmitToDoEdits(e) {
     e.preventDefault();
     setEditing(false);
     handleEditToDo(id, newDescription);
   }
+
+  const handleCompleteToDo = (id, complete) => {
+    dispatch(
+      todoActions.toggleTodo({
+        id,
+        complete: !complete,
+      })
+    );
+  };
 
   return (
     <ListGroup.Item as={'li'} className="w-100 lead" action variant="info">
