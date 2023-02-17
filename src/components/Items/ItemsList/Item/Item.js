@@ -9,7 +9,7 @@ export default function Item({ id, description, complete }) {
   const dispatch = useDispatch();
   const [editing, setEditing] = useState(false);
   const [newDescription, setNewDescription] = useState(description);
-  const { handleDeleteToDo, handleEditToDo } = useItems();
+  const { handleEditToDo } = useItems();
 
   function handleSubmitToDoEdits(e) {
     e.preventDefault();
@@ -22,6 +22,14 @@ export default function Item({ id, description, complete }) {
       todoActions.toggleTodo({
         id,
         complete: !complete,
+      })
+    );
+  };
+
+  const handleDeleteToDo = (id) => {
+    dispatch(
+      todoActions.removeTodo({
+        id,
       })
     );
   };
