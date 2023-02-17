@@ -9,12 +9,16 @@ export default function Item({ id, description, complete }) {
   const dispatch = useDispatch();
   const [editing, setEditing] = useState(false);
   const [newDescription, setNewDescription] = useState(description);
-  const { handleEditToDo } = useItems();
 
   function handleSubmitToDoEdits(e) {
     e.preventDefault();
     setEditing(false);
-    handleEditToDo(id, newDescription);
+    dispatch(
+      todoActions.updateTodo({
+        id,
+        description: newDescription,
+      })
+    );
   }
 
   const handleCompleteToDo = (id, complete) => {
