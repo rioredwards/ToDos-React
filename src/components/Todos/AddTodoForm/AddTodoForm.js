@@ -1,21 +1,16 @@
 import React from 'react';
 import { useState } from 'react';
 import { Button, Container, Form, InputGroup } from 'react-bootstrap';
-import { useItems } from '../../../context/ItemsContext.js';
-import { createListItem } from '../../../services/items.js';
+import { useDispatch } from 'react-redux';
+import { createTodoAction } from '../../../store/todo-actions.js';
 
-export default function AddItemForm() {
+export default function AddTodoForm() {
+  const dispatch = useDispatch();
   const [description, setDescription] = useState('');
-  const { setItems } = useItems();
 
-  const handleAddTodo = async () => {
-    try {
-      const item = await createListItem(description);
-      setItems((prev) => [item, ...prev]);
-      setDescription('');
-    } catch (e) {
-      console.error(e);
-    }
+  const handleAddTodo = () => {
+    dispatch(createTodoAction(description));
+    setDescription('');
   };
 
   return (
