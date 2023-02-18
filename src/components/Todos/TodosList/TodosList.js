@@ -1,9 +1,9 @@
 import React from 'react';
 import { Alert, Col, Container, ListGroup, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import Item from './Item/Item';
+import Todo from './Todo/Todo';
 
-export default function ItemsList() {
+export default function TodosList() {
   const todos = useSelector((state) => state.todo.todos);
 
   return (
@@ -18,14 +18,14 @@ export default function ItemsList() {
               </Alert>
             )}
             {!!todos.length &&
-              todos.map((item) => {
+              todos.map((todo) => {
                 return (
-                  <Item
-                    key={item.id}
-                    id={item.id}
-                    description={item.description}
-                    complete={item.complete}
-                  ></Item>
+                  <Todo
+                    key={todo.id}
+                    id={todo.id}
+                    description={todo.description}
+                    complete={todo.complete}
+                  ></Todo>
                 );
               })}
           </ListGroup>

@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { Button, Col, Container, Form, FormCheck, ListGroup, Row } from 'react-bootstrap';
-import { useItems } from '../../../../context/ItemsContext.js';
 import { Image } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { todoActions } from '../../../../store/todo-slice.js';
 
-export default function Item({ id, description, complete }) {
+export default function Todo({ id, description, complete }) {
   const dispatch = useDispatch();
   const [editing, setEditing] = useState(false);
   const [newDescription, setNewDescription] = useState(description);

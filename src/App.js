@@ -1,9 +1,8 @@
 import { Redirect, Route, Switch } from 'react-router-dom';
 import Header from './components/Header/Header';
-import Items from './components/Items/Items';
+import Todos from './components/Todos/Todos';
 import Auth from './components/Auth/Auth';
 import { useUser } from './context/UserContext';
-import { ItemsProvider } from './context/ItemsContext.js';
 import { Col, Container, Row } from 'react-bootstrap';
 
 function App() {
@@ -17,14 +16,12 @@ function App() {
             <Switch>
               <Route exact path="/">
                 <>
-                  {user && <Redirect to="/items" />}
+                  {user && <Redirect to="/todos" />}
                   {!user && <Redirect to="/auth/sign-in" />}
                 </>
               </Route>
               <Route path="/auth/:type" component={Auth} />
-              <ItemsProvider>
-                <Route path="/items" component={Items} />
-              </ItemsProvider>
+              <Route path="/todos" component={Todos} />
             </Switch>
           </Col>
         </Row>

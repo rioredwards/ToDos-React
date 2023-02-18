@@ -4,7 +4,7 @@ import { Button, Container, Form, InputGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { todoActions } from '../../../store/todo-slice.js';
 
-export default function AddItemForm() {
+export default function AddTodoForm() {
   const dispatch = useDispatch();
   const [description, setDescription] = useState('');
 

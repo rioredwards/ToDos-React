@@ -11,7 +11,7 @@ export default function Auth() {
   const { user, setUser } = useUser();
 
   if (user) {
-    return <Redirect to="/items" />;
+    return <Redirect to="/todos" />;
   }
 
   const submitAuth = async () => {
@@ -24,7 +24,7 @@ export default function Auth() {
   };
 
   return (
-    <Container className="d-flex flex-column align-items-center p-3">
+    <Container className="d-flex flex-column align-todos-center p-3">
       <Form
         onSubmit={(e) => {
           submitAuth();
