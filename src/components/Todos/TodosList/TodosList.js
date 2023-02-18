@@ -11,12 +11,9 @@ export default function TodosList() {
   const todos = useSelector((state) => state.todo.todos);
 
   useEffect(() => {
-    if (isInitial) {
-      isInitial = false;
-      return;
-    }
     dispatch(getAllTodosAction());
-  }, [dispatch]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Container>
