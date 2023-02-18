@@ -4,8 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getAllTodosAction } from '../../../store/todo-actions.js';
 import Todo from './Todo/Todo';
 
-let isInitial = true;
-
 export default function TodosList() {
   const dispatch = useDispatch();
   const todos = useSelector((state) => state.todo.todos);
