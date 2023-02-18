@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Alert, Col, Container, ListGroup, Row } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchTodos } from '../../../store/todo-actions.js';
 import Todo from './Todo/Todo';
 
+let isInitial = true;
+
 export default function TodosList() {
+  const dispatch = useDispatch();
   const todos = useSelector((state) => state.todo.todos);
+
+  useEffect(() => {
+    dispatch(fetchTodos());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (isInitial) {
+      isInitial = false;
+      return;
+    }
+  }, []);
 
   return (
     <Container>
