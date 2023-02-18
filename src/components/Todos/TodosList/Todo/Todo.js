@@ -1,13 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, FormCheck, ListGroup, Row } from 'react-bootstrap';
 import { Image } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { todoActions } from '../../../../store/todo-slice.js';
+import { sendTodoUpdate } from '../../../../store/todo-actions.js';
+import { todoActions } from '../../../../store/todo-slice';
+// import { sendUpdatedTodo } from '../../../store/todo-actions';
+
+let isInitial = true;
 
 export default function Todo({ id, description, complete }) {
   const dispatch = useDispatch();
   const [editing, setEditing] = useState(false);
   const [newDescription, setNewDescription] = useState(description);
+
+  // update remote todo when local todo changes
+  useEffect(() => {
+    if (isInitial) {
+      isInitial = false;
+      return;
+    }
+    dispatch(
+      sendTodoUpdate({
+        id,
+        description,
+        complete,
+      })
+    );
+  }, [id, description, complete, dispatch]);
 
   function handleSubmitToDoEdits(e) {
     e.preventDefault();
@@ -16,20 +35,22 @@ export default function Todo({ id, description, complete }) {
       todoActions.updateTodo({
         id,
         description: newDescription,
+        complete,
       })
     );
   }
 
-  const handleCompleteToDo = (id, complete) => {
+  const handleCompleteToDo = () => {
     dispatch(
-      todoActions.toggleTodo({
+      todoActions.updateTodo({
         id,
+        description,
         complete: !complete,
       })
     );
   };
 
-  const handleDeleteToDo = (id) => {
+  const handleDeleteToDo = () => {
     dispatch(
       todoActions.removeTodo({
         id,
@@ -49,14 +70,14 @@ export default function Todo({ id, description, complete }) {
               <Container className="d-flex align-items-center justify-content-end gap-4">
                 <FormCheck
                   className="form-control-lg my-0 px-0"
-                  onChange={() => handleCompleteToDo(id, complete)}
+                  onChange={() => handleCompleteToDo()}
                   checked={complete}
                 />
                 <Image height={24} src="pencil.png" alt="edit" onClick={() => setEditing(true)} />
                 <Image
                   height={24}
                   src="trash-can.png"
-                  onClick={() => handleDeleteToDo(id)}
+                  onClick={() => handleDeleteToDo()}
                   alt="delete"
                 />
               </Container>

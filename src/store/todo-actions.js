@@ -1,27 +1,41 @@
-import { getTodos } from '../services/items.js';
+import { getTodos, updateTodo } from '../services/todos.js';
 import { todoActions } from './todo-slice.js';
 
-export const fetchTodos = () => {
+export const fetchAllTodos = () => {
   return async (dispatch) => {
     const fetchTodos = async () => {
-      const data = await getTodos();
-      return data;
+      try {
+        const response = await getTodos();
+        return response;
+      } catch (error) {
+        console.error(error.message);
+      }
     };
 
-    try {
-      const todoData = await fetchTodos();
-      dispatch(todoActions.replaceTodos(todoData));
-    } catch (error) {
-      console.error(error.message);
-    }
+    const todoData = await fetchTodos();
+    dispatch(todoActions.replaceTodos(todoData));
+  };
+};
+
+export const sendTodoUpdate = (todo) => {
+  return async () => {
+    const fetchTodos = async () => {
+      try {
+        await updateTodo(todo);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
+    await fetchTodos();
   };
 };
 
 // useEffect(() => {
 //     const fetchItems = async () => {
 //       try {
-//         const data = await getListItems();
-//         setItems(data);
+//         const response = await getListItems();
+//         setItems(response);
 //       } catch (e) {
 //         console.error(e.message);
 //       }
@@ -32,10 +46,10 @@ export const fetchTodos = () => {
 //   const handleCompleteToDo = (id, complete) => {
 //     const completeToDo = async (id, complete) => {
 //       try {
-//         const data = await toggleListItem(id, complete);
+//         const response = await toggleListItem(id, complete);
 //         const newItems = [...items];
 //         const idx = newItems.findIndex((item) => item.id === id);
-//         newItems[idx] = data;
+//         newItems[idx] = response;
 //         setItems(newItems);
 //       } catch (e) {
 //         console.error(e.message);
@@ -47,10 +61,10 @@ export const fetchTodos = () => {
 //   const handleEditToDo = (id, description) => {
 //     const editToDo = async (id, description) => {
 //       try {
-//         const data = await editListItem(id, description);
+//         const response = await editListItem(id, description);
 //         const newItems = [...items];
 //         const idx = newItems.findIndex((item) => item.id === id);
-//         newItems[idx] = data;
+//         newItems[idx] = response;
 //         setItems(newItems);
 //       } catch (e) {
 //         console.error(e.message);
