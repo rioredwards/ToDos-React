@@ -1,9 +1,9 @@
-import { getTodos, updateTodo } from '../services/todos.js';
+import { deleteTodo, getTodos, updateTodo } from '../services/todos.js';
 import { todoActions } from './todo-slice.js';
 
-export const fetchAllTodos = () => {
+export const fetchAllTodosAction = () => {
   return async (dispatch) => {
-    const fetchTodos = async () => {
+    const callGet = async () => {
       try {
         const response = await getTodos();
         return response;
@@ -12,14 +12,14 @@ export const fetchAllTodos = () => {
       }
     };
 
-    const todoData = await fetchTodos();
+    const todoData = await callGet();
     dispatch(todoActions.replaceTodos(todoData));
   };
 };
 
-export const sendTodoUpdate = (todo) => {
+export const updateTodoAction = (todo) => {
   return async () => {
-    const fetchTodos = async () => {
+    const callUpdate = async () => {
       try {
         await updateTodo(todo);
       } catch (error) {
@@ -27,9 +27,37 @@ export const sendTodoUpdate = (todo) => {
       }
     };
 
-    await fetchTodos();
+    await callUpdate();
   };
 };
+
+export const deleteTodoAction = (id) => {
+  return async () => {
+    const callDelete = async () => {
+      try {
+        await deleteTodo(id);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
+    await callDelete();
+  };
+};
+// export const deleteItemThunk = (itemId) => {
+//   return async (dispatch, getState) => {
+//     try {
+//       // Perform the delete operation using an API call or some other mechanism
+//       await deleteItemFromServer(itemId);
+
+//       // Dispatch the delete action after successful delete operation
+//       dispatch(deleteItem(itemId));
+//     } catch (error) {
+//       // Handle errors
+//       console.error('Error deleting item:', error);
+//     }
+//   };
+// };
 
 // useEffect(() => {
 //     const fetchItems = async () => {

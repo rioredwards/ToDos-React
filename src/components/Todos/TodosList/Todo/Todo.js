@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, FormCheck, ListGroup, Row } from 'react-bootstrap';
 import { Image } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { sendTodoUpdate } from '../../../../store/todo-actions.js';
+import { deleteTodoAction, updateTodoAction } from '../../../../store/todo-actions.js';
 import { todoActions } from '../../../../store/todo-slice';
 // import { sendUpdatedTodo } from '../../../store/todo-actions';
 
@@ -20,7 +20,7 @@ export default function Todo({ id, description, complete }) {
       return;
     }
     dispatch(
-      sendTodoUpdate({
+      updateTodoAction({
         id,
         description,
         complete,
@@ -56,6 +56,7 @@ export default function Todo({ id, description, complete }) {
         id,
       })
     );
+    dispatch(deleteTodoAction(id));
   };
 
   return (
