@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Alert, Col, Container, ListGroup, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAllTodosAction } from '../../../store/todo-actions.js';
+import { getAllTodosAction } from '../../../store/todo-actions.js';
 import Todo from './Todo/Todo';
 
 let isInitial = true;
@@ -15,7 +15,7 @@ export default function TodosList() {
       isInitial = false;
       return;
     }
-    dispatch(fetchAllTodosAction());
+    dispatch(getAllTodosAction());
   }, [dispatch]);
 
   return (

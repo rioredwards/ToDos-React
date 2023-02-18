@@ -1,7 +1,7 @@
-import { deleteTodo, getTodos, updateTodo } from '../services/todos.js';
+import { createTodo, deleteTodo, getTodos, updateTodo } from '../services/todos.js';
 import { todoActions } from './todo-slice.js';
 
-export const fetchAllTodosAction = () => {
+export const getAllTodosAction = () => {
   return async (dispatch) => {
     const callGet = async () => {
       try {
@@ -32,7 +32,7 @@ export const updateTodoAction = (todo) => {
 };
 
 export const deleteTodoAction = (id) => {
-  return async () => {
+  return async (dispatch) => {
     const callDelete = async () => {
       try {
         await deleteTodo(id);
@@ -42,8 +42,27 @@ export const deleteTodoAction = (id) => {
     };
 
     await callDelete();
+    dispatch(todoActions.removeTodo({ id }));
   };
 };
+
+export const createTodoAction = (description) => {
+  return async (dispatch) => {
+    const callCreate = async () => {
+      try {
+        const response = await createTodo(description);
+        return response;
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
+    const newTodo = await callCreate();
+
+    dispatch(todoActions.addTodo(newTodo));
+  };
+};
+
 // export const deleteItemThunk = (itemId) => {
 //   return async (dispatch, getState) => {
 //     try {

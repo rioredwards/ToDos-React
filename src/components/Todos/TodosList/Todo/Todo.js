@@ -51,11 +51,6 @@ export default function Todo({ id, description, complete }) {
   };
 
   const handleDeleteToDo = () => {
-    dispatch(
-      todoActions.removeTodo({
-        id,
-      })
-    );
     dispatch(deleteTodoAction(id));
   };
 

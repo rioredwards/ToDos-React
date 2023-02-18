@@ -8,7 +8,7 @@ const todoSlice = createSlice({
       state.todos = action.payload;
     },
     addTodo: (state, action) => {
-      state.todos.push(action.payload);
+      state.todos.unshift(action.payload);
     },
     removeTodo: (state, action) => {
       state.todos = state.todos.filter((todo) => todo.id !== action.payload.id);
