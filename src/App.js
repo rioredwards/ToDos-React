@@ -1,8 +1,10 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Todos from './components/Todos/Todos.js';
+import TodoDetail from './components/Todos/TodoDetail.js';
 import ErrorPage from './pages/ErrorPage.js';
 import HomePage from './pages/HomePage';
 import RootLayout from './pages/RootLayout.js';
+import TodosRootLayout from './pages/TodosRootLayout.js';
+import TodosPage from './pages/TodosPage.js';
 
 const router = createBrowserRouter([
   {
@@ -10,8 +12,15 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { path: '/', element: <HomePage /> },
-      { path: '/todos', element: <Todos /> },
+      { index: true, element: <HomePage /> },
+      {
+        path: 'todos',
+        element: <TodosRootLayout />,
+        children: [
+          { index: true, element: <TodosPage /> },
+          { path: ':id', element: <TodoDetail /> },
+        ],
+      },
     ],
   },
 ]);
