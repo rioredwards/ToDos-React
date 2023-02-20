@@ -1,10 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
-import { Button, Container, Form, InputGroup } from 'react-bootstrap';
+import { Button, CloseButton, Container, Form, InputGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { createTodoAction } from '../../store/todo-actions.js';
 
 export default function AddTodoForm() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [description, setDescription] = useState('');
 
@@ -12,6 +14,10 @@ export default function AddTodoForm() {
     dispatch(createTodoAction(description));
     setDescription('');
   };
+
+  function cancelHandler() {
+    navigate('..');
+  }
 
   return (
     <Container className="mb-4 d-flex flex-column align-items-center">
@@ -36,6 +42,7 @@ export default function AddTodoForm() {
             />
           </InputGroup>
         </Form.Group>
+        <Button onClick={cancelHandler}>Cancel</Button>
       </Form>
     </Container>
   );

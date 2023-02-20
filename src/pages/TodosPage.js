@@ -1,11 +1,11 @@
 import React from 'react';
-import AddTodoForm from '../components/Todos/AddTodoForm.js';
+import { NavLink } from 'react-router-dom';
 import TodosList from '../components/Todos/TodosList';
 
 export default function TodosPage() {
   return (
     <>
-      <AddTodoForm />
+      <NavLink to="/todos/new">Add a todo</NavLink>
       <TodosList />
     </>
   );

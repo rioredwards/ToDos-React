@@ -5,7 +5,7 @@ export default function TodoDetail() {
   const params = useParams();
   return (
     <>
-      <div>TodoDetail</div>
+      <h3>TodoDetail</h3>
       <div>id: {params.id}</div>
     </>
   );
