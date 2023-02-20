@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import { Button, CloseButton, Container, Form, InputGroup } from 'react-bootstrap';
+import { Button, Container, Form, InputGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { createTodoAction } from '../../store/todo-actions.js';

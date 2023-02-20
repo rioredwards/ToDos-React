@@ -5,7 +5,7 @@ export default function TodosDetailPage() {
   return (
     <>
       <h2>TodosDetailPage</h2>
-      <TodoDetail></TodoDetail>
+      <TodoDetail />
     </>
   );
 }

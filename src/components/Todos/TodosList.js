@@ -1,17 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Alert, Col, Container, ListGroup, Row } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllTodosAction } from '../../store/todo-actions.js';
+import { useLoaderData } from 'react-router-dom';
 import Todo from './Todo';
 
 export default function TodosList() {
-  const dispatch = useDispatch();
-  const todos = useSelector((state) => state.todo.todos);
-
-  useEffect(() => {
-    dispatch(getAllTodosAction());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const todos = useLoaderData();
 
   return (
     <Container>
