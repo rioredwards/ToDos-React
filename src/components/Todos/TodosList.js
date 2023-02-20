@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Alert, Col, Container, ListGroup, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getAllTodosAction } from '../../../store/todo-actions.js';
-import Todo from './Todo/Todo';
+import { getAllTodosAction } from '../../store/todo-actions.js';
+import Todo from './Todo';
 
 export default function TodosList() {
   const dispatch = useDispatch();

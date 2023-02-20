@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Button, Container, Form, InputGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { createTodoAction } from '../../../store/todo-actions.js';
+import { createTodoAction } from '../../store/todo-actions.js';
 
 export default function AddTodoForm() {
   const dispatch = useDispatch();

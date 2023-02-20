@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Container, Form, FormCheck, ListGroup, Row } from 'react-bootstrap';
 import { Image } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { deleteTodoAction, updateTodoAction } from '../../../../store/todo-actions.js';
-import { todoActions } from '../../../../store/todo-slice';
+import { deleteTodoAction, updateTodoAction } from '../../store/todo-actions.js';
+import { todoActions } from '../../store/todo-slice';
 // import { sendUpdatedTodo } from '../../../store/todo-actions';
 
 let isInitial = true;
