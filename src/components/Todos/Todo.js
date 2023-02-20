@@ -1,57 +1,24 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Button, Col, Container, Form, FormCheck, ListGroup, Row } from 'react-bootstrap';
 import { Image } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { deleteTodoAction, updateTodoAction } from '../../store/todo-actions.js';
-import { todoActions } from '../../store/todo-slice';
-// import { sendUpdatedTodo } from '../../../store/todo-actions';
-
-let isInitial = true;
+import { NavLink } from 'react-router-dom';
 
 export default function Todo({ id, description, complete }) {
-  const dispatch = useDispatch();
   const [editing, setEditing] = useState(false);
   const [newDescription, setNewDescription] = useState(description);
-
-  // update remote todo when local todo changes
-  useEffect(() => {
-    if (isInitial) {
-      isInitial = false;
-      return;
-    }
-    dispatch(
-      updateTodoAction({
-        id,
-        description,
-        complete,
-      })
-    );
-  }, [id, description, complete, dispatch]);
 
   function handleSubmitToDoEdits(e) {
     e.preventDefault();
     setEditing(false);
-    dispatch(
-      todoActions.updateTodo({
-        id,
-        description: newDescription,
-        complete,
-      })
-    );
+    // Edit todo
   }
 
   const handleCompleteToDo = () => {
-    dispatch(
-      todoActions.updateTodo({
-        id,
-        description,
-        complete: !complete,
-      })
-    );
+    // Complete todo
   };
 
   const handleDeleteToDo = () => {
-    dispatch(deleteTodoAction(id));
+    // Delete todo
   };
 
   return (
@@ -60,7 +27,9 @@ export default function Todo({ id, description, complete }) {
         <Container>
           <Row className="align-items-center justify-content-between">
             <Col xs={6}>
-              <p className="my-1">{`${description}`}</p>
+              <NavLink to={`/todos/${id}`}>
+                <p className="my-1">{`${description}`}</p>
+              </NavLink>
             </Col>
             <Col xs={3} className="d-flex align-items-center justify-content-around gap-4">
               <Container className="d-flex align-items-center justify-content-end gap-4">

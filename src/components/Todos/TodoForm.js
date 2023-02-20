@@ -1,18 +1,15 @@
 import React from 'react';
 import { useState } from 'react';
 import { Button, Container, Form, InputGroup } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { createTodoAction } from '../../store/todo-actions.js';
 
 export default function AddTodoForm() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const [description, setDescription] = useState('');
 
   const handleAddTodo = () => {
-    dispatch(createTodoAction(description));
     setDescription('');
+    // Add todo
   };
 
   function cancelHandler() {

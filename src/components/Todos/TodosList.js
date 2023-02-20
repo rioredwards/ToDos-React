@@ -1,11 +1,8 @@
 import React from 'react';
 import { Alert, Col, Container, ListGroup, Row } from 'react-bootstrap';
-import { useLoaderData } from 'react-router-dom';
 import Todo from './Todo';
 
-export default function TodosList() {
-  const todos = useLoaderData();
-
+export default function TodosList({ todos }) {
   return (
     <Container>
       <Row className="d-flex justify-content-center">
