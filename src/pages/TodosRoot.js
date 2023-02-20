@@ -1,5 +1,5 @@
 import React from 'react';
-import { Outlet } from 'react-router-dom';
+import { json, Outlet } from 'react-router-dom';
 import { getTodoDetail, getTodos } from '../services/todos.js';
 
 export default function TodosRoot() {
@@ -17,7 +17,12 @@ export async function loadTodos() {
     return response;
   } catch (error) {
     console.error(error.message);
-    return error;
+    throw json(
+      { message: 'Could not fetch todos.' },
+      {
+        status: 500,
+      }
+    );
   }
 }
 
@@ -27,6 +32,11 @@ export async function loadTodo(id) {
     return response;
   } catch (error) {
     console.error(error.message);
-    return error;
+    throw json(
+      { message: 'Could not fetch todo.' },
+      {
+        status: 500,
+      }
+    );
   }
 }
