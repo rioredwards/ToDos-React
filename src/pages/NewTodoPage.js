@@ -16,10 +16,18 @@ export async function action({ request }) {
   const data = await request.formData();
   const description = data.get('description');
 
-  try {
-    await createTodo(description);
-  } catch (error) {
-    console.error(error.message);
+  const response = await createTodo(description);
+  // use to show invalid inputs to user (if not using supabase...)
+  if (response.status === 422) {
+    return response;
+  }
+
+  // use to show invalid inputs to user (if not using supabase...)
+  if (response.status === 406) {
+    return response;
+  }
+
+  if (response.error) {
     throw json({ message: 'Could not save event.' }, { status: 500 });
   }
 

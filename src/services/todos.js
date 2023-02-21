@@ -13,9 +13,15 @@ export async function getTodoDetail(id) {
 }
 
 export async function createTodo(description) {
-  const resp = await client.from('todos').insert([{ description }]).single();
+  const resp = await client.from('todos').insert(description).single();
+  const filteredResponse = {
+    data: resp.body,
+    error: resp.error,
+    status: resp.status,
+  };
+  console.log('filteredResponse', filteredResponse);
 
-  return checkError(resp);
+  return filteredResponse;
 }
 
 export async function updateTodo({ id, description, complete }) {

@@ -1,10 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 import { Button, Container, Form as BSForm, InputGroup } from 'react-bootstrap';
-import { Form, useNavigation } from 'react-router-dom';
+import { Form, useActionData, useNavigation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
 export default function TodoForm({ todo }) {
+  const data = useActionData();
+  console.log('data', data);
   const navigate = useNavigate();
   const navigation = useNavigation();
   const [newDescription, setNewDescription] = useState(todo?.description || '');
@@ -18,6 +20,13 @@ export default function TodoForm({ todo }) {
   return (
     <Container className="mb-4 d-flex flex-column align-items-center">
       {/* Note: add an "action" attribute to Form to specify route */}
+      {data && data.error && (
+        <ul>
+          {Object.values(data.error).map((err) => (
+            <li key={err}>{err}</li>
+          ))}
+        </ul>
+      )}
       <BSForm as={Form} method="post">
         <BSForm.Group className="mb-3">
           <h2 className="text-center">Add Todo</h2>
