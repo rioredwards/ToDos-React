@@ -16,14 +16,7 @@ export default function TodosList({ todos }) {
             )}
             {!!todos.length &&
               todos.map((todo) => {
-                return (
-                  <Todo
-                    key={todo.id}
-                    id={todo.id}
-                    description={todo.description}
-                    complete={todo.complete}
-                  ></Todo>
-                );
+                return <Todo key={todo.id} todo={todo}></Todo>;
               })}
           </ListGroup>
         </Col>

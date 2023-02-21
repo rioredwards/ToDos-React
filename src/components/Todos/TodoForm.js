@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { Button, Container, Form, InputGroup } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-export default function AddTodoForm() {
+export default function TodoForm({ todo }) {
   const navigate = useNavigate();
-  const [description, setDescription] = useState('');
+  const [newDescription, setNewDescription] = useState(todo?.description || '');
 
   const handleAddTodo = () => {
-    setDescription('');
+    setNewDescription('');
     // Add todo
   };
 
@@ -21,7 +21,7 @@ export default function AddTodoForm() {
       <Form
         onSubmit={(e) => {
           e.preventDefault();
-          handleAddTodo(description);
+          handleAddTodo(newDescription);
         }}
       >
         <Form.Group className="mb-3">
@@ -34,8 +34,8 @@ export default function AddTodoForm() {
               name="description"
               required
               placeholder="ex: ride a horse"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              defaultValue={newDescription}
+              onChange={(e) => setNewDescription(e.target.value)}
             />
           </InputGroup>
         </Form.Group>

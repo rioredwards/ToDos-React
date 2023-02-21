@@ -22,14 +22,19 @@ const router = createBrowserRouter([
         element: <TodosRoot />,
         children: [
           { index: true, element: <TodosListPage />, loader: todosLoader },
+          { path: 'new', element: <NewTodoPage /> },
           {
             path: ':id',
-            element: <TodosDetailPage />,
-            id: 'todos-detail',
             loader: todosDetailLoader,
+            id: 'todos-detail',
+            children: [
+              {
+                index: true,
+                element: <TodosDetailPage />,
+              },
+              { path: 'edit', element: <EditTodoPage /> },
+            ],
           },
-          { path: 'new', element: <NewTodoPage /> },
-          { path: ':id/edit', element: <EditTodoPage /> },
         ],
       },
     ],

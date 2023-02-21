@@ -1,11 +1,14 @@
 import React from 'react';
-import AddTodoForm from '../components/Todos/TodoForm.js';
+import { useRouteLoaderData } from 'react-router-dom';
+import TodoForm from '../components/Todos/TodoForm.js';
 
 export default function EditTodoPage() {
+  const { todo } = useRouteLoaderData('todos-detail');
+
   return (
     <>
       <div>Edit Todo Page</div>
-      <AddTodoForm />
+      <TodoForm todo={todo} />
     </>
   );
 }
