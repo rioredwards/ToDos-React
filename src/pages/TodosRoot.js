@@ -1,6 +1,6 @@
 import React from 'react';
-import { json, Outlet } from 'react-router-dom';
-import { getTodoDetail, getTodos } from '../services/todos.js';
+import { json, Outlet, redirect } from 'react-router-dom';
+import { deleteTodo, getTodoDetail, getTodos } from '../services/todos.js';
 
 export default function TodosRoot() {
   return (
@@ -39,4 +39,22 @@ export async function loadTodo(id) {
       }
     );
   }
+}
+
+export async function deleteAction({ params, request }) {
+  const id = parseInt(params.id);
+  if (request.method !== 'DELETE') return;
+  try {
+    await deleteTodo(id);
+  } catch (error) {
+    console.error(error.message);
+    throw json(
+      { message: 'Could not delete todo.' },
+      {
+        status: 500,
+      }
+    );
+  }
+
+  return redirect('/todos');
 }

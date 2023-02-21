@@ -1,13 +1,23 @@
 import React from 'react';
 import { Col, Container, FormCheck, Image, ListGroup, Row } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSubmit } from 'react-router-dom';
 
 export default function Todo({ todo }) {
+  const submit = useSubmit();
   const { id, description, complete } = todo;
   const navigate = useNavigate();
 
   function handleToggleToDo() {
     // Complete todo
+  }
+
+  function handleDeleteTodo() {
+    const proceed = window.confirm('Are you sure?');
+
+    if (proceed) {
+      // allows for programmatic form submits to trigger actions
+      submit(null, { method: 'DELETE', action: `/todos/${id}` });
+    }
   }
 
   function handleEditTodo() {
@@ -31,6 +41,7 @@ export default function Todo({ todo }) {
                 checked={complete}
               />
               <Image height={24} src="pencil.png" alt="edit" onClick={handleEditTodo} />
+              <Image height={24} src="trash-can.png" alt="delete" onClick={handleDeleteTodo} />
             </Container>
           </Col>
         </Row>
