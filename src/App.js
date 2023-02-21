@@ -9,6 +9,7 @@ import NewTodoPage from './pages/NewTodoPage.js';
 import EditTodoPage from './pages/EditTodoPage.js';
 import { loader as todosLoader } from './pages/TodosListPage';
 import { loader as todosDetailLoader } from './pages/TodosDetailPage.js';
+import { action as newTodoAction } from './pages/NewTodoPage';
 
 const router = createBrowserRouter([
   {
@@ -22,7 +23,7 @@ const router = createBrowserRouter([
         element: <TodosRoot />,
         children: [
           { index: true, element: <TodosListPage />, loader: todosLoader },
-          { path: 'new', element: <NewTodoPage /> },
+          { path: 'new', element: <NewTodoPage />, action: newTodoAction },
           {
             path: ':id',
             loader: todosDetailLoader,
