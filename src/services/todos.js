@@ -6,6 +6,16 @@ export async function getTodos() {
   return checkError(resp);
 }
 
+export async function getFilteredTodos(searchString) {
+  const resp = await client
+    .from('todos')
+    .select()
+    .like('description', `%${searchString}%`)
+    .order('id', { ascending: false });
+
+  return checkError(resp);
+}
+
 export async function getTodoDetail(id) {
   const resp = await client.from('todos').select().match({ id }).single();
 

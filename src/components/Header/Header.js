@@ -2,6 +2,7 @@ import logo from './todo-logo.png';
 import React from 'react';
 import { Container, Nav, Navbar } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
+import Search from '../Todos/Search.js';
 
 export default function Header() {
   return (
@@ -18,6 +19,7 @@ export default function Header() {
           {'  '}
           ToDos
         </Navbar.Brand>
+        <Search />
         <Nav className="mr-auto">
           <Nav.Link to="/" as={NavLink}>
             Home

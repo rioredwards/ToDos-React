@@ -9,7 +9,8 @@ import NewTodoPage from './pages/NewTodoPage.js';
 import EditTodoPage from './pages/EditTodoPage.js';
 import { loader as todosLoader } from './pages/TodosListPage';
 import { loader as todosDetailLoader } from './pages/TodosDetailPage';
-import { action as newTodoAction } from './components/Todos/TodoForm';
+import { action as addOrEditTodosAction } from './components/Todos/TodoForm';
+import SearchPage, { action as searchAction } from './pages/SearchPage.js';
 
 const router = createBrowserRouter([
   {
@@ -23,7 +24,7 @@ const router = createBrowserRouter([
         element: <TodosRoot />,
         children: [
           { index: true, element: <TodosListPage />, loader: todosLoader },
-          { path: 'new', element: <NewTodoPage />, action: newTodoAction },
+          { path: 'new', element: <NewTodoPage />, action: addOrEditTodosAction },
           {
             path: ':id',
             loader: todosDetailLoader,
@@ -34,9 +35,10 @@ const router = createBrowserRouter([
                 index: true,
                 element: <TodosDetailPage />,
               },
-              { path: 'edit', element: <EditTodoPage /> },
+              { path: 'edit', element: <EditTodoPage />, action: addOrEditTodosAction },
             ],
           },
+          { path: 'search', element: <SearchPage />, action: searchAction },
         ],
       },
     ],
