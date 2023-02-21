@@ -12,20 +12,19 @@ export async function getTodoDetail(id) {
   return checkError(resp);
 }
 
-export async function createTodo(description) {
-  const resp = await client.from('todos').insert(description).single();
+export async function createTodo({ description }) {
+  const resp = await client.from('todos').insert([{ description }]).single();
   const filteredResponse = {
     data: resp.body,
     error: resp.error,
     status: resp.status,
   };
-  console.log('filteredResponse', filteredResponse);
 
   return filteredResponse;
 }
 
-export async function updateTodo({ id, description, complete }) {
-  const resp = await client.from('todos').update({ description, complete }).eq('id', id).single();
+export async function updateTodo({ id, description }) {
+  const resp = await client.from('todos').update({ description }).eq('id', id).single();
 
   return checkError(resp);
 }

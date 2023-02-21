@@ -8,8 +8,8 @@ import TodosDetailPage from './pages/TodosDetailPage.js';
 import NewTodoPage from './pages/NewTodoPage.js';
 import EditTodoPage from './pages/EditTodoPage.js';
 import { loader as todosLoader } from './pages/TodosListPage';
-import { loader as todosDetailLoader } from './pages/TodosDetailPage.js';
-import { action as newTodoAction } from './pages/NewTodoPage';
+import { loader as todosDetailLoader } from './pages/TodosDetailPage';
+import { action as newTodoAction } from './components/Todos/TodoForm';
 
 const router = createBrowserRouter([
   {

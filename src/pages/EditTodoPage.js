@@ -8,7 +8,7 @@ export default function EditTodoPage() {
   return (
     <>
       <div>Edit Todo Page</div>
-      <TodoForm todo={todo} />
+      <TodoForm todo={todo} method={'PATCH'} />
     </>
   );
 }

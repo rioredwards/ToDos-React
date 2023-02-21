@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState } from 'react';
 import { Button, Container, Form as BSForm, InputGroup } from 'react-bootstrap';
-import { Form, useActionData, useNavigation } from 'react-router-dom';
+import { Form, json, redirect, useActionData, useNavigation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { createTodo, updateTodo } from '../../services/todos.js';
 
-export default function TodoForm({ todo }) {
+export default function TodoForm({ method, todo }) {
   const data = useActionData();
-  console.log('data', data);
   const navigate = useNavigate();
   const navigation = useNavigation();
   const [newDescription, setNewDescription] = useState(todo?.description || '');
@@ -27,7 +27,7 @@ export default function TodoForm({ todo }) {
           ))}
         </ul>
       )}
-      <BSForm as={Form} method="post">
+      <BSForm as={Form} method={method}>
         <BSForm.Group className="mb-3">
           <h2 className="text-center">Add Todo</h2>
           <InputGroup className="mb-3">
@@ -49,4 +49,29 @@ export default function TodoForm({ todo }) {
       </BSForm>
     </Container>
   );
+}
+
+export async function action({ request, params }) {
+  const method = request.method;
+  const data = await request.formData();
+  const newTodo = {
+    id: params.id || undefined,
+    description: data.get('description'),
+    complete: false,
+  };
+
+  let response = null;
+  if (method === 'POST') response = await createTodo(newTodo);
+  if (method === 'PATCH') response = await updateTodo(newTodo);
+
+  // use to show invalid inputs to user
+  if (response.status === 422) {
+    return response;
+  }
+
+  if (response.error) {
+    throw json({ message: 'Could not save event.' }, { status: 500 });
+  }
+
+  return redirect('/todos');
 }
